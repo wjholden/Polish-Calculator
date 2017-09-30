@@ -150,14 +150,14 @@ public class Polish {
     }
 
     public static void main(String[] args) {
-        if (args.length == 0) {
-            System.out.println("Usage: java -jar Polish.jar [repl|plot3d]\n"
-                    + " repl:   read-evaluate-print loop\n"
-                    + " plot3d: compute f(x,y) for xmin-xmax by ymin-ymax range");
+        if (args.length == 0 || args[0].equals("repl")) {
+            repl();
         } else if (args[0].equals("plot3d")) {
             plot3d();
         } else {
-            repl();
+            System.out.println("Usage: java -jar Polish.jar [repl|plot3d]\n"
+                    + " repl:   read-evaluate-print loop\n"
+                    + " plot3d: compute f(x,y) for xmin-xmax by ymin-ymax range");
         }
     }
 }
