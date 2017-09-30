@@ -25,18 +25,34 @@ public class PolishGraph extends GLJPanel implements GLEventListener, KeyListene
     private float x, y, z, rx, ry, rz;
     
     public PolishGraph(String function, float xmin, float xmax, float ymin, float ymax, int segments) {
+        this(Polish.plot3d(function, xmin, xmax, ymin, ymax, segments));
+    }
+    
+    public PolishGraph(double[][] vertices) {
         super(new GLCapabilities(null));
         setPreferredSize(new Dimension(400, 400));
         addGLEventListener(this);
         addKeyListener(this);
         x = y = z = rx = ry = rz = 0.0f;
-        vertices = Polish.plot3d(function, xmin, xmax, ymin, ymax, segments);
+        this.vertices = vertices;
+    }
+    
+    public PolishGraph() {
+        this(Polish.plot3d());
     }
     
     public static void main(String[] args) {
-        String function = "+ ^ sin x 2 ^ cos y 2";
-        JFrame window = new JFrame("3D plot of: " + function);
-        PolishGraph panel = new PolishGraph(function, 0, 10, 0, 10, 25);
+        JFrame window;
+        PolishGraph panel;
+        if (args.length > 0 && args[0].contains("demo)")) {
+            String function = "+ ^ sin x 2 ^ cos y 2";
+            window = new JFrame("3D plot of: " + function);
+            panel = new PolishGraph(function, 0, 10, 0, 10, 25);
+        } else {
+            window = new JFrame("3D plot of a function expressed in Polish Notation");
+            panel = new PolishGraph();
+        }
+        
         window.setContentPane(panel);
         window.pack();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
