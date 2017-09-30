@@ -27,4 +27,5 @@ Input: sqrt ^ 3 8
 Output: 81.0
 Input: + ^ sin pi 2 ^ cos pi 2
 Output: 1.0
-Input: quit```
+Input: quit
+```
